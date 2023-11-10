@@ -3,9 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{9F7C2E89-4A8F-4CAF-B859-BA9C2947B015}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{7D08383D-D1B9-4BB7-BE1A-B3E5A951D0FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra.Data", "Infra.Data", "{21169FF1-DC17-4E4E-90B0-27FAFFB2A0DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra.IoC", "Infra.IoC", "{09ACF3E7-3D8B-46DA-8051-EB498724C250}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{8E928E4A-4BE2-49B9-BD4F-1E4EE983E3EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanDomain", "CleanDomain\CleanDomain.csproj", "{D85FA827-EE52-464A-8385-1F692D626B7C}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D85FA827-EE52-464A-8385-1F692D626B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D85FA827-EE52-464A-8385-1F692D626B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D85FA827-EE52-464A-8385-1F692D626B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D85FA827-EE52-464A-8385-1F692D626B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D85FA827-EE52-464A-8385-1F692D626B7C} = {7D08383D-D1B9-4BB7-BE1A-B3E5A951D0FA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00F9BDEA-108E-4D5A-A08B-F0C5DD7ADC46}
