@@ -7,6 +7,8 @@ namespace Clean.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    //CRUD using CORS
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
