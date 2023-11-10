@@ -21,5 +21,10 @@ namespace Clean.Infra.Data.Repository
         {
             return _context.Products.ToListAsync();
         }
+        async Task<Product> IProductRepository.GetProductById(int id)
+        {
+            var product = _context.Products.Find(id);
+            return product;
+        }
     }
 }

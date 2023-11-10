@@ -26,5 +26,16 @@ namespace Clean.WebApi.Controllers
             return Ok(products);
 
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductsById(int id)
+        {
+
+            ProductDto product = await _productService.GetProductById(new ProductDto() { Id = id });
+
+
+            return Ok(product);
+
+        }
     }
 }

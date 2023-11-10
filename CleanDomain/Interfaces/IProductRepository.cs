@@ -10,5 +10,7 @@ namespace CleanDomain.Interfaces
     public interface IProductRepository
     {
         Task<List<Product>> GetProduct();
+        public Task<Product> GetProductById(int id);
+
     }
 }

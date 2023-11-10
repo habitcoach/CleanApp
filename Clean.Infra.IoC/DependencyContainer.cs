@@ -34,7 +34,7 @@ namespace Clean.Infra.IoC
             Services.AddScoped<IMediatorHandler, InMemoryBus>();
 
             Services.AddScoped<IRequestHandler<GetProductsQuery, IEnumerable<Product>>, GetProductsQueryHandler>();
-
+            Services.AddScoped<IRequestHandler<GetProductByIdQuery, Product>, GetProductByIdQueryHandler>();
 
 
         }

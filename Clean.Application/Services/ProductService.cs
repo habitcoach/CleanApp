@@ -30,5 +30,23 @@ namespace Clean.Application.Services
                 Products = await _bus.SendCommandOrQuery(new GetProductsQuery())
             };
         }
+
+        public async Task<ProductDto> GetProductById(ProductDto productdto)
+        {
+            var getProductById = new GetProductByIdQuery(
+                productdto.Id
+               );
+            var product = await _bus.SendCommandOrQuery(getProductById);
+
+
+            ProductDto dtoResult = new ProductDto() { Id = product.Id,
+                                                   Name = product.Name,
+                                                   Price = product.Price,
+                                                   Description= product.Description,
+                                                   ImageUrl = product.ImageUrl };
+
+            return dtoResult;
+        }
+
     }
 }

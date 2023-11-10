@@ -10,5 +10,6 @@ namespace Clean.Application.Interfaces
     public interface IProductService
     {
         Task<Dto> GetProduct();
+        public Task<ProductDto> GetProductById(ProductDto productdto);
     }
 }
