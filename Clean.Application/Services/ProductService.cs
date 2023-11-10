@@ -1,4 +1,5 @@
 ﻿using Clean.Application.DTOs;
+using Clean.Application.Interfaces;
 using CleanDomain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Clean.Application.Services
 {
-    public class ProductService
+    public class ProductService:IProductService
     {
         private readonly IProductRepository _ProductRepository;
 

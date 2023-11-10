@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Clean.Application\Clean.Application.csproj" />
     <ProjectReference Include="..\Clean.Infra.Data\Clean.Infra.Data.csproj" />
+    <ProjectReference Include="..\Clean.Infra.IoC\Clean.Infra.IoC.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 using Clean.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Clean.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ var connectionString = builder.Configuration.GetConnectionString("RestaurantDBCo
 builder.Services.AddDbContext<RestaurantDBContext>(options =>
     options.UseSqlServer(connectionString));
 
+builder.Services.RegisterServices();//Add project IoC project reference to the WebApi project if its not resolved
 
 var app = builder.Build();
 
