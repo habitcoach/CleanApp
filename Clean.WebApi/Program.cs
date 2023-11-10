@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("RestaurantDBContext");
 builder.Services.AddDbContext<RestaurantDBContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString));  //For product db
 
 builder.Services.RegisterServices();//Add project IoC project reference to the WebApi project if its not resolved
 
