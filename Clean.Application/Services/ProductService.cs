@@ -1,4 +1,5 @@
-﻿using Clean.Application.DTOs;
+﻿using AutoMapper;
+using Clean.Application.DTOs;
 using Clean.Application.Interfaces;
 using Clean.Domain.Core.Bus;
 using CleanDomain.Commands;
@@ -16,11 +17,13 @@ namespace Clean.Application.Services
     {
         private readonly IProductRepository _ProductRepository;
         private readonly IMediatorHandler _bus;
+        private readonly IMapper _autoMapper;
 
-        public ProductService(IProductRepository ProductRepository, IMediatorHandler bus)
+        public ProductService(IProductRepository ProductRepository, IMediatorHandler bus, IMapper autoMapper)
         {
             _ProductRepository = ProductRepository;
             _bus = bus;
+            _autoMapper = autoMapper;
         }
 
         public async Task<Dto> GetProduct()
@@ -39,43 +42,51 @@ namespace Clean.Application.Services
                );
             var product = await _bus.SendCommandOrQuery(getProductById);
 
+            #region automapper for productDto
+            //ProductDto dtoResult = new ProductDto() { Id = product.Id,
+            //                                       Name = product.Name,
+            //                                       Price = product.Price,
+            //                                       Description= product.Description,
+            //                                       ImageUrl = product.ImageUrl };
 
-            ProductDto dtoResult = new ProductDto() { Id = product.Id,
-                                                   Name = product.Name,
-                                                   Price = product.Price,
-                                                   Description= product.Description,
-                                                   ImageUrl = product.ImageUrl };
 
-            return dtoResult;
+
+            //return dtoResult;
+            #endregion
+
+            return _autoMapper.Map<ProductDto>(product);
         }
 
         public void Create(ProductDto productDto)
         {
-            var createProductCommand = new CreateProductCommand(
+            #region automapper for createProductCommand
+            //var createProductCommand = new CreateProductCommand(
 
-                productDto.Name,
-                productDto.Description,
-                productDto.Price,
-                productDto.ImageUrl
+            //    productDto.Name,
+            //    productDto.Description,
+            //    productDto.Price,
+            //    productDto.ImageUrl
 
-                );
+            //    );
+            #endregion
 
-            _bus.SendCommandOrQuery(createProductCommand);
+            _bus.SendCommandOrQuery(_autoMapper.Map<CreateProductCommand>(productDto));
         }
 
 
         public void UpdateProduct(ProductDto productDto)
         {
-            var updateProductCommand = new UpdateProductCommand(
-                productDto.Id,
-                productDto.Name,
-                productDto.Description,
-                productDto.Price,
-                productDto.ImageUrl
+            //var updateProductCommand = new UpdateProductCommand(
+            //    productDto.Id,
+            //    productDto.Name,
+            //    productDto.Description,
+            //    productDto.Price,
+            //    productDto.ImageUrl
 
-                );
+            //    );
 
-            _bus.SendCommandOrQuery(updateProductCommand);
+           _bus.SendCommandOrQuery(_autoMapper.Map<UpdateProductCommand>(productDto));
+            
            
         }
 
