@@ -11,5 +11,7 @@ namespace Clean.Application.Interfaces
     {
         Task<Dto> GetProduct();
         public Task<ProductDto> GetProductById(ProductDto productdto);
+
+        public void Create(ProductDto productDto);
     }
 }

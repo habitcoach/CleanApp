@@ -12,5 +12,7 @@ namespace CleanDomain.Interfaces
         Task<List<Product>> GetProduct();
         public Task<Product> GetProductById(int id);
 
+        public void AddProduct(Product product);
+
     }
 }

@@ -3,6 +3,7 @@ using Clean.Application.Services;
 using Clean.Domain.Core.Bus;
 using Clean.Infra.Data.Repository;
 using CleanDomain.CommandQueryHandlers;
+using CleanDomain.Commands;
 using CleanDomain.Interfaces;
 using CleanDomain.Models;
 using CleanDomain.Queries;
@@ -35,6 +36,7 @@ namespace Clean.Infra.IoC
 
             Services.AddScoped<IRequestHandler<GetProductsQuery, IEnumerable<Product>>, GetProductsQueryHandler>();
             Services.AddScoped<IRequestHandler<GetProductByIdQuery, Product>, GetProductByIdQueryHandler>();
+            Services.AddScoped<IRequestHandler<CreateProductCommand, bool>, CreateProductCommandHandler>();
 
 
         }

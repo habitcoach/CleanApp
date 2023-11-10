@@ -1,6 +1,7 @@
 ﻿using Clean.Application.DTOs;
 using Clean.Application.Interfaces;
 using Clean.Domain.Core.Bus;
+using CleanDomain.Commands;
 using CleanDomain.Interfaces;
 using CleanDomain.Queries;
 using System;
@@ -46,6 +47,20 @@ namespace Clean.Application.Services
                                                    ImageUrl = product.ImageUrl };
 
             return dtoResult;
+        }
+
+        public void Create(ProductDto productDto)
+        {
+            var createProductCommand = new CreateProductCommand(
+
+                productDto.Name,
+                productDto.Description,
+                productDto.Price,
+                productDto.ImageUrl
+
+                );
+
+            _bus.SendCommandOrQuery(createProductCommand);
         }
 
     }

@@ -17,6 +17,13 @@ namespace Clean.Infra.Data.Repository
         {
             _context = context;
         }
+
+        public void AddProduct(Product product)
+        {
+            _context.Products.Add(product);
+            _context.SaveChanges();
+        }
+
         public Task<List<Product>> GetProduct()
         {
             return _context.Products.ToListAsync();
