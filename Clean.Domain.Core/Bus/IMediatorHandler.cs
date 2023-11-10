@@ -9,6 +9,6 @@ namespace Clean.Domain.Core.Bus
 {
     public interface IMediatorHandler
     {
-        public Task<T> SendCommand<T>(IRequest<T> commandOrQuery);
+        public Task<T> SendCommandOrQuery<T>(IRequest<T> commandOrQuery);
     }
 }

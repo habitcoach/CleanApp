@@ -17,10 +17,10 @@ namespace Clean.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProducts()
+        public async Task<IActionResult> GetProducts()
         {
 
-            Dto products = _productService.GetProduct();
+            Dto products = await _productService.GetProduct();
 
 
             return Ok(products);

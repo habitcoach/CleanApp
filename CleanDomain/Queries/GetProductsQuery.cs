@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanDomain.Interfaces
+namespace CleanDomain.Queries
 {
-    public interface IProductRepository
+    public class GetProductsQuery:ProductQuery<IEnumerable<Product>>
     {
-        Task<List<Product>> GetProduct();
     }
 }

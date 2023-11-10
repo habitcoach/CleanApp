@@ -1,6 +1,7 @@
 ﻿using Clean.Infra.Data.Context;
 using CleanDomain.Interfaces;
 using CleanDomain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,9 @@ namespace Clean.Infra.Data.Repository
         {
             _context = context;
         }
-        public IEnumerable<Product> GetProduct()
+        public Task<List<Product>> GetProduct()
         {
-            return _context.Products;
+            return _context.Products.ToListAsync();
         }
     }
 }

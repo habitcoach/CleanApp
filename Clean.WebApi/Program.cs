@@ -15,6 +15,8 @@ var connectionString = builder.Configuration.GetConnectionString("RestaurantDBCo
 builder.Services.AddDbContext<RestaurantDBContext>(options =>
     options.UseSqlServer(connectionString));  //For product db
 
+builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Program>()); // to register mediatR
+
 builder.Services.RegisterServices();//Add project IoC project reference to the WebApi project if its not resolved
 
 var app = builder.Build();

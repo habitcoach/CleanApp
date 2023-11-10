@@ -1,7 +1,13 @@
 ﻿using Clean.Application.Interfaces;
 using Clean.Application.Services;
+using Clean.Domain.Core.Bus;
 using Clean.Infra.Data.Repository;
+using CleanDomain.CommandQueryHandlers;
 using CleanDomain.Interfaces;
+using CleanDomain.Models;
+using CleanDomain.Queries;
+using Infra.Bus;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -23,6 +29,13 @@ namespace Clean.Infra.IoC
             //Infra.Data layer
 
             Services.AddScoped<IProductRepository, ProductRepository>();
+
+            //Bus
+            Services.AddScoped<IMediatorHandler, InMemoryBus>();
+
+            Services.AddScoped<IRequestHandler<GetProductsQuery, IEnumerable<Product>>, GetProductsQueryHandler>();
+
+
 
         }
     }
