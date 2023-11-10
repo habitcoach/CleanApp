@@ -63,5 +63,21 @@ namespace Clean.Application.Services
             _bus.SendCommandOrQuery(createProductCommand);
         }
 
+
+        public void UpdateProduct(ProductDto productDto)
+        {
+            var updateProductCommand = new UpdateProductCommand(
+                productDto.Id,
+                productDto.Name,
+                productDto.Description,
+                productDto.Price,
+                productDto.ImageUrl
+
+                );
+
+            _bus.SendCommandOrQuery(updateProductCommand);
+           
+        }
+
     }
 }

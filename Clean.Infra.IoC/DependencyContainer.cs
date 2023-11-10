@@ -37,6 +37,7 @@ namespace Clean.Infra.IoC
             Services.AddScoped<IRequestHandler<GetProductsQuery, IEnumerable<Product>>, GetProductsQueryHandler>();
             Services.AddScoped<IRequestHandler<GetProductByIdQuery, Product>, GetProductByIdQueryHandler>();
             Services.AddScoped<IRequestHandler<CreateProductCommand, bool>, CreateProductCommandHandler>();
+            Services.AddScoped<IRequestHandler<UpdateProductCommand, bool>, UpdateProductCommandHandler>();
 
 
         }

@@ -47,5 +47,16 @@ namespace Clean.WebApi.Controllers
             return Ok(productDto);
 
         }
+
+
+        [HttpPut]
+        public IActionResult Update([FromBody] ProductDto productDto)
+        {
+
+             _productService.UpdateProduct(productDto);
+
+            return Ok(productDto);
+
+        }
     }
 }

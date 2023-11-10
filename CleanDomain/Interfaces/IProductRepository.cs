@@ -14,5 +14,7 @@ namespace CleanDomain.Interfaces
 
         public void AddProduct(Product product);
 
+        public void UpdateProduct(Product product);
+
     }
 }

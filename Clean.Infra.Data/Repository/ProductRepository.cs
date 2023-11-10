@@ -33,5 +33,12 @@ namespace Clean.Infra.Data.Repository
             var product = _context.Products.Find(id);
             return product;
         }
+
+        public void UpdateProduct(Product product)
+        {
+            _context.Update(product);
+            _context.SaveChanges();
+           
+        }
     }
 }
