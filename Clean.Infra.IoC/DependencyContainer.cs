@@ -30,6 +30,7 @@ namespace Clean.Infra.IoC
             //Infra.Data layer
 
             Services.AddScoped<IProductRepository, ProductRepository>();
+            Services.AddScoped<ITokenRepository, TokenRepository>();
 
             //Bus
             Services.AddScoped<IMediatorHandler, InMemoryBus>();

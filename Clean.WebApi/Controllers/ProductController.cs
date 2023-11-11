@@ -8,7 +8,7 @@ namespace Clean.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize]
+    
 
     //CRUD using CORS
     public class ProductController : ControllerBase
@@ -21,6 +21,7 @@ namespace Clean.WebApi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetProducts([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
 
             [FromQuery] string? sortBy, [FromQuery] bool? isAscending, [FromQuery] int? pageNumber =1, [FromQuery] int? pageSize=1000)
@@ -35,6 +36,7 @@ namespace Clean.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetProductsById(int id)
         {
 
@@ -46,6 +48,7 @@ namespace Clean.WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public IActionResult CreateProduct([FromBody] ProductDto productDto)
         {
 
@@ -57,6 +60,7 @@ namespace Clean.WebApi.Controllers
 
 
         [HttpPut]
+        [Authorize(Roles = "Writer")]
         public IActionResult Update([FromBody] ProductDto productDto)
         {
 
