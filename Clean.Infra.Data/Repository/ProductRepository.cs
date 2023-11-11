@@ -24,9 +24,32 @@ namespace Clean.Infra.Data.Repository
             _context.SaveChanges();
         }
 
-        public Task<List<Product>> GetProduct()
+        public Task<List<Product>> GetProduct(string? filterOn, string? filterQuery,
+           string? sortBy, bool? isAscending = true, int? PageNumber = 1, int? PageSize = 10)
         {
-            return _context.Products.ToListAsync();
+            var products = _context.Products.AsQueryable();
+            //filter
+            if (string.IsNullOrWhiteSpace(filterOn) == false && string.IsNullOrWhiteSpace(filterQuery) == false)
+            {
+
+                if (filterOn.Equals("Description", StringComparison.OrdinalIgnoreCase))
+                    products = products.Where(x => x.Description.Contains(filterQuery));
+
+            }
+            //sort
+            if (string.IsNullOrWhiteSpace(sortBy) == false)
+            {
+
+                if (sortBy.Equals("Price", StringComparison.OrdinalIgnoreCase))
+                    products = isAscending ?? true ? products.OrderBy(x => x.Price) : products.OrderByDescending(x => x.Price);
+
+            }
+
+            //Pagination
+
+            var skipResult = (PageNumber - 1) * PageSize;
+
+            return products.Skip((int)skipResult).Take((int)PageSize).ToListAsync();
         }
         async Task<Product> IProductRepository.GetProductById(int id)
         {

@@ -20,7 +20,8 @@ namespace CleanDomain.CommandQueryHandlers
         }
         public async Task<IEnumerable<Product>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
-            return await _productRepository.GetProduct();
+            return await _productRepository.GetProduct(request.filterOn, request.filterQuery, request.sortBy, request.isAscending
+                 , request.pageNumber, request.pageSize);
         }
     }
 }

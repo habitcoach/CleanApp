@@ -19,10 +19,13 @@ namespace Clean.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProducts()
+        public async Task<IActionResult> GetProducts([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
+
+            [FromQuery] string? sortBy, [FromQuery] bool? isAscending, [FromQuery] int? pageNumber =1, [FromQuery] int? pageSize=1000)
         {
 
-            Dto products = await _productService.GetProduct();
+            Dto products = await _productService.GetProduct(filterOn, filterQuery, sortBy, isAscending,
+                pageNumber, pageSize);
 
 
             return Ok(products);

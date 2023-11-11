@@ -9,7 +9,8 @@ namespace Clean.Application.Interfaces
 {
     public interface IProductService
     {
-        Task<Dto> GetProduct();
+        public Task<Dto> GetProduct(string? filterOn = null, string? filterQuery = null, string? sortBy = null, bool? isAscending = true,
+            int? pageNumber = 1, int? pageSize = 10);
         public Task<ProductDto> GetProductById(ProductDto productdto);
 
         public void Create(ProductDto productDto);

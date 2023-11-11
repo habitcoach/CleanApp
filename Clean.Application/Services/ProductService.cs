@@ -26,12 +26,13 @@ namespace Clean.Application.Services
             _autoMapper = autoMapper;
         }
 
-        public async Task<Dto> GetProduct()
+        public async Task<Dto> GetProduct(string? filterOn, string? filterQuery, string? sortBy, bool? isAscending,
+             int? pageNumber = 1, int? pageSize = 10)
         {
             return new Dto
             {
 
-                Products = await _bus.SendCommandOrQuery(new GetProductsQuery())
+                Products = await _bus.SendCommandOrQuery(new GetProductsQuery(filterOn, filterQuery, sortBy, isAscending ?? true, pageNumber, pageSize))
             };
         }
 
@@ -76,6 +77,7 @@ namespace Clean.Application.Services
 
         public void UpdateProduct(ProductDto productDto)
         {
+            #region automapper for updateProductCommand
             //var updateProductCommand = new UpdateProductCommand(
             //    productDto.Id,
             //    productDto.Name,
@@ -84,8 +86,9 @@ namespace Clean.Application.Services
             //    productDto.ImageUrl
 
             //    );
+            #endregion
 
-           _bus.SendCommandOrQuery(_autoMapper.Map<UpdateProductCommand>(productDto));
+            _bus.SendCommandOrQuery(_autoMapper.Map<UpdateProductCommand>(productDto));
             
            
         }
