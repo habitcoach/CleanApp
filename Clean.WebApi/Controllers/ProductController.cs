@@ -1,5 +1,6 @@
 ﻿using Clean.Application.DTOs;
 using Clean.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace Clean.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   // [Authorize]
 
     //CRUD using CORS
     public class ProductController : ControllerBase

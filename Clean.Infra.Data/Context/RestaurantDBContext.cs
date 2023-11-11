@@ -10,7 +10,7 @@ namespace Clean.Infra.Data.Context
 {
     public class RestaurantDBContext:DbContext
     {
-        public RestaurantDBContext(DbContextOptions options):base(options) { }
+        public RestaurantDBContext(DbContextOptions<RestaurantDBContext> options) :base(options) { }
         
         public DbSet<Product> Products { get; set; }
     }
