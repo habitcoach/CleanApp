@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => {
 
 
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "RestaurantAPI", Version = "v1" });
+   // options.SwaggerDoc("v1", new OpenApiInfo { Title = "RestaurantAPI", Version = "v1" });
     options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
     {
 
@@ -80,6 +81,20 @@ builder.Services.AddApiVersioning(options => {
 
 #endregion
 
+#region Versioning_swagger
+
+builder.Services.AddVersionedApiExplorer(options =>
+{
+
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+
+});
+
+
+
+#endregion
+
 #region Setting up identity
 
 builder.Services.AddIdentityCore<IdentityUser>()  // use for identity
@@ -118,14 +133,27 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
  });
 #endregion
-
+builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();  //version_swagger
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+var versionDescriptionProvider =
+   app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options => {
+
+        foreach (var description in versionDescriptionProvider.ApiVersionDescriptions)
+        {
+
+            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json",
+                description.GroupName.ToUpperInvariant());
+
+        }
+
+
+    });
 }
 
 app.UseHttpsRedirection();

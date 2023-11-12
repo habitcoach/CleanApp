@@ -43,11 +43,10 @@ namespace Clean.WebApi.Controllers
         [MapToApiVersion("2.0")]
         public async Task<IActionResult> GetProductsV2([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
 
-           [FromQuery] string? sortBy, [FromQuery] bool? isAscending, [FromQuery] int? pageNumber = 1, [FromQuery] int? pageSize = 1000)
+           [FromQuery] string? sortBy, [FromQuery] bool? isAscending)
         {
 
-            Dto products = await _productService.GetProduct(filterOn, filterQuery, sortBy, isAscending,
-                pageNumber, pageSize);
+            Dto products = await _productService.GetProduct(filterOn, filterQuery, sortBy);
 
 
             return Ok(products);
