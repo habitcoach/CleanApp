@@ -67,6 +67,19 @@ builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<Progra
 builder.Services.RegisterServices();//Add project IoC project reference to the WebApi project if its not resolved
 builder.Services.RegisterAutoMapper(); // for automapper
 
+#region Versioning
+
+builder.Services.AddApiVersioning(options => {
+
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    options.ReportApiVersions = true;
+
+});
+
+
+#endregion
+
 #region Setting up identity
 
 builder.Services.AddIdentityCore<IdentityUser>()  // use for identity
