@@ -23,7 +23,7 @@ namespace Clean.WebApi.Controllers
         }
 
         [HttpGet]
-     //   [Authorize(Roles = "Reader")]
+        [Authorize(Roles = "Reader")]
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetProductsV1([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
 
@@ -39,7 +39,7 @@ namespace Clean.WebApi.Controllers
         }
 
         [HttpGet]
-      //  [Authorize(Roles = "Reader")]
+        [Authorize(Roles = "Reader")]
         [MapToApiVersion("2.0")]
         public async Task<IActionResult> GetProductsV2([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
 
