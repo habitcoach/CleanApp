@@ -3,6 +3,7 @@ using Clean.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace Clean.WebApi.Controllers
 {
@@ -17,24 +18,43 @@ namespace Clean.WebApi.Controllers
     {
         private readonly IProductService _productService;
 
-        public ProductController(IProductService productService)
+        public ILogger<ProductController> _logger { get; }
+
+        public ProductController(IProductService productService, ILogger<ProductController> logger)
         {
             _productService = productService;
+            _logger = logger;
         }
 
         [HttpGet]
-        [Authorize(Roles = "Reader")]
+       // [Authorize(Roles = "Reader")]
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetProductsV1([FromQuery] string? filterOn, [FromQuery] string? filterQuery,
 
             [FromQuery] string? sortBy, [FromQuery] bool? isAscending, [FromQuery] int? pageNumber =1, [FromQuery] int? pageSize=1000)
         {
+            _logger.LogInformation("GetProducts action method was invoked");
 
-            Dto products = await _productService.GetProduct(filterOn, filterQuery, sortBy, isAscending,
-                pageNumber, pageSize);
+            _logger.LogWarning("This is a warning log");
 
+            _logger.LogError("This is a error log");
 
-            return Ok(products);
+            try
+            {
+              //  throw new Exception("This is custom exception"); //uncomment this to catch exception in console
+                Dto products = await _productService.GetProduct(filterOn, filterQuery, sortBy, isAscending,
+                    pageNumber, pageSize);
+                _logger.LogInformation($"Finished GetProducts request with data:{JsonSerializer.Serialize(products)}");
+                return Ok(products);
+
+            }
+            catch (Exception ex) {
+
+                _logger.LogError(ex, ex.Message);
+                throw;
+            }
+
+           
 
         }
 
