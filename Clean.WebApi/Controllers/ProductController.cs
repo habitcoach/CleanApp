@@ -41,7 +41,7 @@ namespace Clean.WebApi.Controllers
 
             try
             {
-              //  throw new Exception("This is custom exception"); //uncomment this to catch exception in console
+                throw new Exception("This is custom exception"); //uncomment this to catch exception in console but to handler exception we cannot reapeat try and catch every time,hence we use global exception hander in middleware
                 Dto products = await _productService.GetProduct(filterOn, filterQuery, sortBy, isAscending,
                     pageNumber, pageSize);
                 _logger.LogInformation($"Finished GetProducts request with data:{JsonSerializer.Serialize(products)}");

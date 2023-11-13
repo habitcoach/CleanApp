@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Serilog;
+using Clean.WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -171,6 +172,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseMiddleware<ExceptionHandlerMiddleware>();  // Global exception handler
 app.UseHttpsRedirection();
 
 app.UseAuthentication(); // to auth
