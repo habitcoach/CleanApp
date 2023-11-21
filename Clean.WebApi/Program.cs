@@ -150,6 +150,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  });
 #endregion
 builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();  //version_swagger
+
+#region caching
+
+builder.Services.AddResponseCaching(
+    
+    options => { 
+    
+        options.MaximumBodySize = 8192;
+        options.UseCaseSensitivePaths = true;
+
+    });
+
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -174,6 +188,28 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();  // Global exception handler
 app.UseHttpsRedirection();
+
+#region caching
+
+app.UseResponseCaching();
+
+app.Use(async (context, next) =>
+{
+    context.Response.GetTypedHeaders().CacheControl =
+    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+    {
+
+        Public = true,
+        MaxAge = TimeSpan.FromSeconds(30)
+
+    };
+    context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
+    new string[] { "Accept-Encoding"};
+
+    await next();
+});
+
+#endregion
 
 app.UseAuthentication(); // to auth
 app.UseAuthorization();
