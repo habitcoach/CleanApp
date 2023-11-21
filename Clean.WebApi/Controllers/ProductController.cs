@@ -1,5 +1,6 @@
 ﻿using Clean.Application.DTOs;
 using Clean.Application.Interfaces;
+using Clean.WebApi.CustomActionFilter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +42,7 @@ namespace Clean.WebApi.Controllers
 
             try
             {
-              //  throw new Exception("This is custom exception"); //uncomment this to catch exception in console
+               // throw new Exception("This is custom exception"); //uncomment this to catch exception in console
                 Dto products = await _productService.GetProduct(filterOn, filterQuery, sortBy, isAscending,
                     pageNumber, pageSize);
                 _logger.LogInformation($"Finished GetProducts request with data:{JsonSerializer.Serialize(products)}");
@@ -87,8 +88,9 @@ namespace Clean.WebApi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Writer")]
+       // [Authorize(Roles = "Writer")]
         [ApiVersion("1.0")]
+        [ValidateModel]
         public IActionResult CreateProduct([FromBody] ProductDto productDto)
         {
 
