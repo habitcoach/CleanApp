@@ -191,23 +191,24 @@ app.UseHttpsRedirection();
 
 #region caching
 
-app.UseResponseCaching();
+//app.UseResponseCaching();
 
-app.Use(async (context, next) =>
-{
-    context.Response.GetTypedHeaders().CacheControl =
-    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
-    {
+//app.Use(async (context, next) =>
+//{
+//    context.Response.GetTypedHeaders().CacheControl =
+//    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+//    {
 
-        Public = true,
-        MaxAge = TimeSpan.FromSeconds(30)
+//        Public = true,
+//        MaxAge = TimeSpan.FromSeconds(30)
 
-    };
-    context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
-    new string[] { "Accept-Encoding"};
+//    };
+//    context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
+//    new string[] { "Accept-Encoding"};
 
-    await next();
-});
+//    await next();
+//});
+app.UseMiddleware<ResponseCachingMiddleware>();
 
 #endregion
 
